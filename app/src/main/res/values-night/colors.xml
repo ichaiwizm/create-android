@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base aurora sombre (DESIGN §2.3) : évite un flash clair avant Compose en thème sombre. -->
+    <color name="window_background">#0E1220</color>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Thème XML de base (fenêtre / splash pré-Compose uniquement). Tout le theming visible est porté
+        par Compose Material3 (CreateTheme) ; ce thème plateforme évite toute dépendance à la lib
+        com.google.android.material. Barres système transparentes : l'edge-to-edge est piloté par
+        MainActivity (enableEdgeToEdge). Variante sombre dans values-night/themes.xml.
+    -->
+    <style name="Theme.Create" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

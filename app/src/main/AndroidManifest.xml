@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Réseau (backend Next.js + PocketBase + fichiers média). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Dictée vocale du prompt (AudioRecorder). -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Retour haptique (fallback vibrateur). -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Notifications de complétion (runtime à partir d'API 33). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".CreateApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Create"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|uiMode"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Create">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Deep-link de notification : create://gallery(?generationId=…) — CONTRACTS §3.8. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="create" android:host="gallery" />
+            </intent-filter>
+        </activity>
+
+        <!-- Firebase Cloud Messaging (jalon M7). Réception des push de complétion. -->
+        <service
+            android:name=".core.push.CreateFcmService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Canal de notification par défaut FCM (data-messages). -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="generations" />
+
+        <!-- Partage de fichiers média (MediaSaver / FileShare) — autorité ${applicationId}.fileprovider. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Auto-init Firebase désactivée : pas de google-services.json fourni pour ce build interne
+             (FCM dormant, aucun crash de FirebaseInitProvider). Restaurer ce provider + appliquer le
+             plugin com.google.gms.google-services quand un vrai projet Firebase sera relié (M7). -->
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="${applicationId}.firebaseinitprovider"
+            android:exported="false"
+            tools:node="remove" />
+
+    </application>
+
+</manifest>

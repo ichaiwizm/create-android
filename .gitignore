@@ -1,0 +1,25 @@
+# ===== Gradle / build =====
+.gradle/
+build/
+app/build/
+captures/
+out/
+
+# ===== Android Studio / IntelliJ =====
+.idea/
+*.iml
+.DS_Store
+local.properties
+
+# ===== Signature (jamais commité — injecté par la CI depuis les secrets) =====
+*.jks
+*.keystore
+keystore.properties
+app/keystore.properties
+app/upload.jks
+
+# ===== Firebase (config réelle non commitée) =====
+google-services.json
+
+# ===== Kotlin =====
+.kotlin/

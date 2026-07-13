@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Chaînes de l'écran Réglages (ui/settings). Fichier dédié : Android fusionne tous les
+    values/*.xml ; les noms sont préfixés `settings_` pour éviter toute collision.
+-->
+<resources>
+    <string name="settings_title">Réglages</string>
+    <string name="settings_back">Retour</string>
+
+    <string name="settings_appearance">Apparence</string>
+    <string name="settings_theme">Thème</string>
+    <string name="settings_theme_system">Système</string>
+    <string name="settings_theme_light">Clair</string>
+    <string name="settings_theme_dark">Sombre</string>
+
+    <string name="settings_dynamic_color">Couleurs dynamiques</string>
+    <string name="settings_dynamic_color_desc">Adapte les surfaces aux couleurs de ton fond d\'écran. L\'accent iris de Create reste inchangé.</string>
+
+    <string name="settings_account">Compte</string>
+    <string name="settings_logout">Déconnexion</string>
+</resources>

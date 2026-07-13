@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fond de fenêtre pré-Compose (évite un flash blanc avant l'aurora). Base aurora claire. -->
+    <color name="window_background">#EEF0FD</color>
+    <!-- Fond d'icône adaptative (repli si le vecteur dégradé n'est pas utilisé). -->
+    <color name="ic_launcher_background">#3B82F6</color>
+</resources>
